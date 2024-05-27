@@ -37,7 +37,7 @@ spec:
             mountPath: /config/kafka-consumer.properties
             subPath: kafka-consumer.properties
     volumes:
-      - name: kafka-props-tests-secret
+      - name: kafka-props-tests
         secret:
           secretName: kafka-props-tests
           defaultMode: 420
