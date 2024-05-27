@@ -11,7 +11,11 @@ spec:
   source:
     repoURL: https://github.com/davidseve/amq-streams-testing.git
     targetRevision: HEAD
-    path: ./chart        
+    path: ./chart    
+    helm:
+     parameters:
+      - name: "kafka.password"
+        value: "password0"     
   project: default
   syncPolicy:
     automated:
