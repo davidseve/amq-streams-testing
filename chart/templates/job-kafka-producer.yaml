@@ -16,10 +16,12 @@ spec:
       serviceAccountName: kafka-tests     
       containers:
       - name: test-kafka-producer
-        image: quay.io/openshift/origin-cli:4.14
-        workingDir: /workspace/output
-        command: ["/bin/bash", "-c"]
-        args: ['echo "${message}" | oc -n ${namespace}  exec -it ${cluster}-kafka-0 -- bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port}  --topic ${topic} --consumer-property security.protocol=SASL_PLAINTEXT --consumer-property sasl.mechanism=SCRAM-SHA-512 --consumer-property sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="kafka-sec-user" password="{{ .Values.kafka.password }}  >/dev/null 2>&1']
+        image: registry.redhat.io/amq-streams/kafka-36-rhel8
+        command:
+          - /bin/sh
+          - '-c'
+          - >-
+            /opt/kafka/bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --producer.config=/config/kafka-producer.properties >/dev/null 2>&1']
         env:
           - name: message
             value: {{ .Values.kafka.message }}
