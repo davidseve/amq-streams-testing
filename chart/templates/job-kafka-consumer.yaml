@@ -21,7 +21,7 @@ spec:
           - /bin/sh
           - '-c'
           - >-
-            /opt/kafka/bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --consumer.config=/config/kafka-consumer.properties --max-messages 1 | grep "${message}" || exit 1
+            /opt/kafka/bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --consumer.config=kafka-consumer.properties --max-messages 1 | grep "${message}" || exit 1
         env:
           - name: message
             value: {{ .Values.kafka.message }}
@@ -36,7 +36,7 @@ spec:
         volumeMounts:
           - name: kafka-props-tests
             readOnly: true
-            mountPath: /config/kafka-consumer.properties
+            mountPath: /opt/kafka/bin/kafka-consumer.properties
             subPath: kafka-consumer.properties
       volumes:
       - name: kafka-props-tests
