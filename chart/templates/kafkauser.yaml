@@ -19,11 +19,11 @@ spec:
           key: password
   authorization:
     type: simple
-    acls:
-      - resource:
-          type: topic
-          name: {{ .Values.kafka.topic | quote }}
-          patternType: prefix
-        operations: 
-          - "All"
-        host: "*"
+    # acls:
+    #   - resource:
+    #       type: topic
+    #       name: {{ .Values.kafka.topic | quote }}
+    #       patternType: prefix
+    #     operations: 
+    #       - "All"
+    #     host: "*"

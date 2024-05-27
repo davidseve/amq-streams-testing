@@ -21,7 +21,7 @@ spec:
           - /bin/sh
           - '-c'
           - >-
-            sleep 200 && echo "${message}" | /opt/kafka/bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --producer.config=/config/kafka-producer.properties >/dev/null 2>&1
+            sleep 10 && echo "${message}" | /opt/kafka/bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} >/dev/null 2>&1
         env:
           - name: message
             value: {{ .Values.kafka.message }}
@@ -32,15 +32,5 @@ spec:
           - name: topic
             value: {{ .Values.kafka.topic }}     
           - name: port
-            value: {{ .Values.kafka.port | quote }}
-        volumeMounts:
-          - name: kafka-props-tests
-            readOnly: true
-            mountPath: /config/kafka-producer.properties
-            subPath: kafka-producer.properties
-      volumes:
-      - name: kafka-props-tests
-        secret:
-          secretName: kafka-props-tests
-          defaultMode: 420           
+            value: {{ .Values.kafka.port | quote }}        
   backoffLimit: 0
