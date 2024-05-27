@@ -32,14 +32,14 @@ spec:
           - name: port
             value: {{ .Values.kafka.port | quote }}       
         volumeMounts:
-            - name: kafka-props-tests
-              readOnly: true
-              mountPath: /config/kafka-consumer.properties
-              subPath: kafka-consumer.properties
-    volumes:
-    - name: kafka-props-tests
-      secret:
-        secretName: kafka-props-tests
-        defaultMode: 420
+          - name: kafka-props-tests
+            readOnly: true
+            mountPath: /config/kafka-consumer.properties
+            subPath: kafka-consumer.properties
+      volumes:
+      - name: kafka-props-tests
+        secret:
+          secretName: kafka-props-tests
+          defaultMode: 420
 
   backoffLimit: 0
