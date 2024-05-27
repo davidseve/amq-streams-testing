@@ -16,7 +16,7 @@ spec:
       serviceAccountName: kafka-tests     
       containers:
       - name: test-kafka-producer
-        image: registry.redhat.io/amq-streams/kafka-36-rhel8
+        image: registry.redhat.io/amq-streams/kafka-36-rhel8@sha256:8b10bfb697b48ba3ed246fb846384f4cc67f05f670e9521edf0f47f829869404
         command:
           - /bin/sh
           - '-c'
