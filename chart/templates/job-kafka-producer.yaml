@@ -21,7 +21,7 @@ spec:
           - /bin/sh
           - '-c'
           - >-
-            /opt/kafka/bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --producer.config=/config/kafka-producer.properties >/dev/null 2>&1
+            /opt/kafka/bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} >/dev/null 2>&1
         env:
           - name: message
             value: {{ .Values.kafka.message }}
