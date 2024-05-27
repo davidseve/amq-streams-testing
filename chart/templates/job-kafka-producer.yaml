@@ -32,10 +32,10 @@ spec:
           - name: port
             value: {{ .Values.kafka.port | quote }}
         volumeMounts:
-            - name: kafka-props-tests-v
-              readOnly: true
-              mountPath: /config/kafka-producer.properties
-              subPath: kafka-producer.properties
+          - name: kafka-props-tests-v
+            readOnly: true
+            mountPath: /config/kafka-producer.properties
+            subPath: kafka-producer.properties
     volumes:
     - name: kafka-props-tests-v
       secret:
