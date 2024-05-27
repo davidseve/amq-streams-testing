@@ -33,12 +33,10 @@ spec:
             value: {{ .Values.kafka.port | quote }}
         volumeMounts:
           - name: kafka-props-tests-v
-            readOnly: true
-            mountPath: /config/kafka-producer.properties
-            subPath: kafka-producer.properties
-    volumes:
-    - name: kafka-props-tests-v
-      secret:
-        secretName: kafka-props-tests
-        defaultMode: 420           
+
+      volumes:
+      - name: kafka-props-tests-v
+        secret:
+          secretName: kafka-props-tests
+           
   backoffLimit: 0
