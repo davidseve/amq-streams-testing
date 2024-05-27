@@ -19,7 +19,7 @@ spec:
         image: quay.io/openshift/origin-cli:4.14
         workingDir: /workspace/output
         command: ["/bin/bash", "-c"]
-        args: ['oc -n ${namespace} exec -i ${cluster}-kafka-0 -- bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --consumer.config=/config/kafka-consumer.properties --max-messages 1 | grep "${message}" || exit 1']
+        args: ['sleep 10000 && oc -n ${namespace} exec -i ${cluster}-kafka-0 -- bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --consumer.config=/config/kafka-consumer.properties --max-messages 1 | grep "${message}" || exit 1']
         env:
           - name: message
             value: {{ .Values.kafka.message }}
