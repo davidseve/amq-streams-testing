@@ -19,14 +19,7 @@ spec:
         image: quay.io/openshift/origin-cli:4.14
         workingDir: /workspace/output
         command: ["/bin/bash", "-c"]
-        args: ['oc -n ${namespace} exec -i ${cluster}-kafka-0 -- ',
-               'bin/kafka-console-consumer.sh --topic ${topic} ',
-               '--bootstrap-server ${cluster}-kafka-bootstrap:${port} ',
-               '--max-messages 1 ',
-               '--consumer-property security.protocol=SASL_PLAINTEXT ' ,
-               '--consumer-property sasl.mechanism=SCRAM-SHA-512 ' ,
-               '--consumer-property sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="kafka-sec-user" password="{{ .Values.kafka.password }} ' ,
-               ' | grep "${message}" || exit 1']
+        args: ['oc -n ${namespace} exec -i ${cluster}-kafka-0 -- bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --max-messages 1 --consumer-property security.protocol=SASL_PLAINTEXT --consumer-property sasl.mechanism=SCRAM-SHA-512 --consumer-property sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="kafka-sec-user" password="{{ .Values.kafka.password }} | grep "${message}" || exit 1']
         env:
           - name: message
             value: {{ .Values.kafka.message }}
