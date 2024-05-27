@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: appset-discounts-helm
+  name: amq
   namespace: openshift-gitops
 spec:
   destination:
