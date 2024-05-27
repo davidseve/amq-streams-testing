@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "10"
+  name: test-kafka-producer2
+  namespace: {{ .Values.namespace }}  
+spec:
+  template:
+    metadata:
+      name: test-kafka-producer
+    spec:
+     restartPolicy: Never
+     serviceAccountName: kafka-tests     
+     containers:
+     - name: test-kafka-producer
+       image: quay.io/openshift/origin-cli:4.14
+       workingDir: /workspace/output
+       command: ["/bin/bash", "-c"]
+       args: ['oc -n {{ .Values.namespace }} exec -it amq-cluster-kafka-0 -- bin/kafka-console-consumer.sh --topic kafka-topic --bootstrap-server amq-cluster-kafka-bootstrap:9092 --max-messages 1 | grep "${message}" || exit 1']
+       env:
+         - name: message
+           value: "aaa"
+          #TODO add more envs
+  backoffLimit: 1

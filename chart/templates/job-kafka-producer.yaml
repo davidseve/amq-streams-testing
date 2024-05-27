@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "20"
+  name: test-kafka-consumer
+  namespace: {{ .Values.namespace }}  
+spec:
+  template:
+    metadata:
+      name: test-kafka-consumer
+    spec:
+     restartPolicy: Never
+     serviceAccountName: kafka-tests     
+     containers:
+     - name: test-kafka-consumer
+       image: quay.io/openshift/origin-cli:4.14
+       workingDir: /workspace/output
+       command: ["/bin/bash", "-c"]
+       args: ['echo "${message}" | oc -n ${namespace }  exec -it ${cluster}-kafka-0 -- bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:9092 >/dev/null 2>&1']
+       env:
+         - name: message
+           value: {{ .Values.kafka.message }}
+         - name: namespace
+           value: {{ .Values.namespace }}  
+         - name: cluster
+           value: {{ .Values.kafka.cluster }} 
+         - name: topic
+           value: {{ .Values.kafka.topic }}                                 
+          #TODO add more envs
+  backoffLimit: 1

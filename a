@@ -1,0 +1,27 @@
+#!/bin/bash
+
+consume_and_validate_messages() {
+    # Read the first message from Kafka
+    message=$(oc -n amq-streams-testing  exec -it amq-cluster-kafka-0 -- bin/kafka-console-consumer.sh --topic kafka-topic --bootstrap-server amq-cluster-kafka-bootstrap:9092 --max-messages 1)
+    
+    # Perform validation on the received message
+    if [[ -n $message ]]; then
+        if [[ $message == "Expected_message"* ]]; then
+            echo "Received message is valid: $message"
+        else
+            echo "Received message is invalid: $message"
+            exit 1
+        fi
+    else
+        echo "No message received from Kafka topic within the timeout period."
+    fi
+}
+
+# Main function
+main() {
+    echo "Start consuming messages from Kafka topic: kafka-topic"
+    consume_and_validate_messages
+}
+
+# Call the main function
+main

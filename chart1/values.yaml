@@ -1,0 +1,4 @@
+namespace: amq-streams-testing
+kafka:
+  cluster: amq-cluster
+  message: this-is-a-test

@@ -1,0 +1,16 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+  name: {{ .Values.kafka.topic }}
+  labels:
+    strimzi.io/cluster: {{ .Values.kafka.cluster }}
+  namespace: {{ .Values.namespace }}
+spec:
+  config:
+    retention.ms: 604800000
+    segment.bytes: 1073741824
+  partitions: 3
+  replicas: 3
