@@ -20,9 +20,8 @@ spec:
         command:
           - /bin/sh
           - '-c'
-          - echo "${message}"
           - >-
-            sleep 10 && echo "${message}" | /opt/kafka/bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --producer.config=/config/kafka-producer.properties >/dev/null 2>&1
+            sleep 20 && echo "${message}" | /opt/kafka/bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --producer.config=/config/kafka-producer.properties >/dev/null 2>&1
         env:
           - name: message
             value: {{ .Values.kafka.message }}
