@@ -19,7 +19,7 @@ spec:
        image: quay.io/openshift/origin-cli:4.14
        workingDir: /workspace/output
        command: ["/bin/bash", "-c"]
-       args: ['sleep 10 && echo "${message}" | oc -n ${namespace}  exec -it ${cluster}-kafka-0 -- bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} >/dev/null 2>&1']
+       args: ['sleep 10 && echo "${message}" | oc -n ${namespace}  exec -it ${cluster}-kafka-0 -- bin/kafka-console-producer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --producer.config=/config/kafka-producer.properties >/dev/null 2>&1']
        env:
          - name: message
            value: {{ .Values.kafka.message }}
@@ -31,4 +31,14 @@ spec:
            value: {{ .Values.kafka.topic }}     
          - name: port
            value: {{ .Values.kafka.port | quote }}
+       volumeMounts:
+          - name: kafka-props-tests-secret
+            readOnly: true
+            mountPath: /config/kafka-producer.properties
+            subPath: kafka-producer.properties
+    volumes:
+      - name: kafka-props-tests-secret
+        secret:
+          secretName: kafka-props-tests
+          defaultMode: 420           
   backoffLimit: 0
