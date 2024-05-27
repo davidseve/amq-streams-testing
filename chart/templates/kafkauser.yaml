@@ -15,7 +15,7 @@ spec:
     password:
       valueFrom:
         secretKeyRef:
-          name: kafka-sec-user
+          name: kafka-sec-pass
           key: password
   authorization:
     type: simple
