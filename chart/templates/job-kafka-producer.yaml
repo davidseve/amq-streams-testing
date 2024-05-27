@@ -31,5 +31,4 @@ spec:
            value: {{ .Values.kafka.topic }}     
          - name: port
            value: {{ .Values.kafka.port | quote }}
-          #TODO add more envs
   backoffLimit: 0
