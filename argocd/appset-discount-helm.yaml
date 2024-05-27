@@ -1,0 +1,15 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-discounts-helm
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: in-cluster  
+    namespace: openshift-gitops
+  source:
+    repoURL: https://github.com/davidseve/amq-streams-testing.git
+    targetRevision: HEAD
+    path: ./chart        
+  project: default

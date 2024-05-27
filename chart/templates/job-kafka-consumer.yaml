@@ -19,7 +19,7 @@ spec:
        image: quay.io/openshift/origin-cli:4.14
        workingDir: /workspace/output
        command: ["/bin/bash", "-c"]
-       args: ['oc -n {{ .Values.namespace }} exec -it ${cluster}-kafka-0 -- bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:9092 --max-messages 1 | grep "${message}" || exit 1']
+       args: ['oc -n {{ .Values.namespace }} exec -it ${cluster}-kafka-0 -- bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --max-messages 1 | grep "${message}" || exit 1']
        env:
          - name: message
            value: {{ .Values.kafka.message }}
@@ -28,6 +28,8 @@ spec:
          - name: cluster
            value: {{ .Values.kafka.cluster }}                      
          - name: topic
-           value: {{ .Values.kafka.topic }}            
+           value: {{ .Values.kafka.topic }}      
+         - name: port
+           value: {{ .Values.kafka.port }}                   
           #TODO add more envs
   backoffLimit: 1
