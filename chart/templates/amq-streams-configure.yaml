@@ -58,3 +58,5 @@ spec:
     storage:
       type: ephemeral
     replicas: 3
+    authorization:
+      type: simple    
