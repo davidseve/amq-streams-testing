@@ -38,6 +38,8 @@ spec:
       default.replication.factor: 3
       min.insync.replicas: 2
       inter.broker.protocol.version: '3.3'
+    authorization:
+      type: simple          
     storage:
       type: ephemeral
     listeners:
@@ -58,5 +60,3 @@ spec:
     storage:
       type: ephemeral
     replicas: 3
-    authorization:
-      type: simple    
