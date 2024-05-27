@@ -39,11 +39,11 @@ spec:
       min.insync.replicas: 2
       inter.broker.protocol.version: '3.3'
     authorization:
-      type: scram-sha-512          
+      type: simple          
     storage:
       type: ephemeral
     listeners:
-      - name: plain
+      - name: scram-sha-512
         port: 9092
         type: internal
         tls: false
