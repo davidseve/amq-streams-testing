@@ -10,7 +10,7 @@ spec:
     namespace: openshift-gitops
   source:
     repoURL: https://github.com/davidseve/amq-streams-testing.git
-    targetRevision: authoritetion
+    targetRevision: authorization
     path: ./chart    
     helm:
      parameters:
