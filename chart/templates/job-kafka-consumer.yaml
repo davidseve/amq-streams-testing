@@ -21,8 +21,10 @@ spec:
           - /bin/sh
           - '-c'
           - sleep 10
-          - >-
-            /opt/kafka/bin/kafka-console-consumer.sh --topic ${topic} --bootstrap-server ${cluster}-kafka-bootstrap:${port} --consumer.config=/config/kafka-consumer.properties --max-messages 1 | grep "${message}" || exit 1
+          - /opt/kafka/bin/kafka-console-consumer.sh --topic ${topic} 
+          - --bootstrap-server ${cluster}-kafka-bootstrap:${port} 
+          - --consumer.config=/config/kafka-consumer.properties 
+          - --max-messages 1 | grep "${message}" || exit 1
         env:
           - name: message
             value: {{ .Values.kafka.message }}
