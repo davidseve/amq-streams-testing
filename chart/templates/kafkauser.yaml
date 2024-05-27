@@ -11,7 +11,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"    
 spec:
   authentication:
-    type: SCRAM-SHA-256
+    type: SCRAM-SHA-512
     password:
       valueFrom:
         secretKeyRef:
