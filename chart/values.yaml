@@ -1,4 +1,6 @@
 namespace: amq-streams-testing
 kafka:
   cluster: amq-cluster
+  port: 9092
+  topic: testing-topic
   message: this-is-a-test
