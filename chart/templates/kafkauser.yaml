@@ -27,3 +27,10 @@ spec:
         operations: 
           - "All"
         host: "*"
+      - resource:
+          type: group
+          name: "*"
+          patternType: literal
+        operations: 
+          - "All"
+        host: "*"        
