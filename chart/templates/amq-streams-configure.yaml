@@ -43,10 +43,12 @@ spec:
     storage:
       type: ephemeral
     listeners:
-      - name: scram-sha-512
+      - name: plain
         port: 9092
         type: internal
         tls: false
+        authentication: 
+          type: scram-sha-512
       - name: tls
         port: 9093
         type: internal
