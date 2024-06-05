@@ -1,4 +1,4 @@
-# AMQ Streams Testing
+# AMQ Streams Testing with Argo CD
 
 ## Overview
 This repository provides a setup for testing AMQ Streams (Kafka) on OpenShift with Argo CD integration. The testing includes the configuration of Kafka topics and the deployment of two distinct Kubernetes Jobs that are instantiated within the OpenShift cluster. The first Job is responsible for producing a message to the Kafka topic, while the second Job is tasked with consuming the message from the Kafka topic.
@@ -14,7 +14,7 @@ The argocd.argoproj.io/sync-wave annotation allows you to control the order in w
 ### argocd.argoproj.io/hook-delete-policy
 The argocd.argoproj.io/hook-delete-policy annotation specifies when a hook resource should be deleted. Options include HookSucceeded, HookFailed, and BeforeHookCreation. This helps in cleaning up resources that are no longer needed after the hook's execution.
 
-For further details, please refer to the [Argo CD documentation on sync waves](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-waves/).
+For further details, please refer to the Argo CD documentation on [sync waves](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-waves/) and [resource hooks](https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks).
 
 ## Prerequisites
 - OpenShift cluster
@@ -47,9 +47,8 @@ This Argo CD application will create:
 - ServiceAccount
 - RoleBinding
 - Kafka instance
-- KafkaUser
 
-After the synchronization, using the PostSync Argo CD hook will create:
+After the synchronization for testing purpose, using the PostSync Argo CD hook will create:
 - Wave 0 (first wave)
   - KafkaUser
   - KafkaTopic
