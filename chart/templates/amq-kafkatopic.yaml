@@ -8,11 +8,10 @@ metadata:
   name: {{ .Values.kafka.topic }}
   labels:
     strimzi.io/cluster: {{ .Values.kafka.cluster }}
-    test: test
   namespace: {{ .Values.namespace }}
 spec:
   config:
-    retention.ms: 604800000
+    retention.ms: 604800001
     segment.bytes: 1073741824
   partitions: 3
   replicas: 3
