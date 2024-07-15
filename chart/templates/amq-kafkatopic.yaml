@@ -8,7 +8,7 @@ metadata:
   name: {{ .Values.kafka.topic }}
   labels:
     strimzi.io/cluster: {{ .Values.kafka.cluster }}
-    test: true
+    test: test
   namespace: {{ .Values.namespace }}
 spec:
   config:
