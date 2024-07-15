@@ -11,7 +11,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   config:
-    retention.ms: 604800001
+    retention.ms: 604800000
     segment.bytes: 1073741824
   partitions: 3
   replicas: 3
